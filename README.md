@@ -1,7 +1,6 @@
 # Westwoods RCON Bot
 
-Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay messages from your server's RCON to a specified discord. This bot also tracks users and the amount of time since the server's wipe, displaying it (if enabled) as the bot's status.
-
+Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay messages from your server's RCON to a specified discord. This bot also tracks users and the amount of time since the server's wipe, displaying it (if enabled) as the bot's status. Along with also tracking a user's STEAMID whenever they send messages, this can be seen as the footer in the screeenshots.
 
 # How does it work?
 
@@ -28,7 +27,7 @@ And you are all set!
 
 Item | Definition
 --- | ---
-TOKEN=COOLASSTOKENHERE |
+TOKEN=COOLASSTOKENHERE | Your bot's token, this can be found at the discord applications tab.
 IP=SERVERIP | Your server IP address.
 PORT=SERVERPORT | Your **RCON** Port!
 PASS=RCONPASSWORD | RCON Password, defined in your server startup parameters.
@@ -36,7 +35,7 @@ CONNECT_CHAN=689205495386734661 | Channel ID for where the connection and close 
 CONNECT_MSG=``The RCON connection has been opened.`` | Message that is sent when the connection is opened.
 CLOSE_MSG=``The RCON connection has been closed.`` | Message that is sent when the connection is closed (If you shutdown the bot it will not display this, only when the server is shutdown or restarted).
 RELOAD=15000 | Time in milliseconds between server info updates (getting player count), default is 15 seconds.
-PLAYER_CHAN=689283942767263752 |
+PLAYER_CHAN= | Channel ID for player count logging (Honestly it is just spam.) **Recommend** to remain empty.
 SERVER_COLOR=#fdfdfd | Embed color for all server messages.
 SERVER_CHAN=689205495386734661 | Channel ID for server messages (It's a lot of spam), delete or create some random number to disable.
 ABUSE_COLOR=#EFD298 | Embed color for possibly abusive commands such as, give, teleport (not working at the moment, or killplayer).
@@ -52,7 +51,7 @@ SCHAT_COLOR=#B298EF | Server chat embed color
 CHAT_CHAN=689205495386734661 | Channel ID of where all chat messages go to.
 INCLUDE_WIPED_FROM=LeaveBlankToDisable |Whether or not you want the wipe time to be shown in the status. Delete **LeaveBlankToDisable** for it to be disabled.
 
-For support, feel free to message me! Clint Westwood#8187
+For support, feel free to message me! **Clint Westwood#8187**
 
 ## Screenshots
 
