@@ -1,5 +1,4 @@
 # Westwoods RCON Bot
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
 Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay messages from your server's RCON to a specified discord. This bot also tracks users and the amount of time since the server's wipe, displaying it (if enabled) as the bot's status.
 
