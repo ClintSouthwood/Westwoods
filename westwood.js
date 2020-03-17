@@ -117,8 +117,7 @@ client.onmessage = function(event) {
 
         function set(ply) {
             c.user.setActivity(`${ply}`, {
-                type: "STREAMING",
-                url: "https://twitch.tv/a_pink_panther"
+                type: "WATCHING",
             })
             c.channels.fetch(process.env.PLAYER_CHAN)
                 // .then(channel => channel.send(`${date} : ${wipedate}`));
