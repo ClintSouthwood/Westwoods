@@ -7,6 +7,23 @@ Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay me
 
 This bot uses ``ws`` to create a WebSocket, which connects to the server. From there whenever a message is recieved, those messages are sorted and based on the conditions provided gives them a unique embed and color. To track players, when the bot connects it sends a command to the RCON with a unique identifier. The RCON then responds to the command with a message, that has the same unique identifier. This message is sorted based on it's  unique identifier, and every time it is received redefines the amount of players online, maximum, queued, and time since wipe.
 
+# Installation
+
+You will first need to clone the repository
+```
+$ git clone https://github.com/ClintSouthwood/Westwoods
+$ cd Westwoods
+```
+... and then you will need to install the dependencies
+```
+$ yarn install
+```
+... Configure the .env.example file, then remove the ".example" part, once that is done run
+```
+$ node westwood.js
+```
+And you are all set!
+
 ## Configuration
 
 Item | Definition
