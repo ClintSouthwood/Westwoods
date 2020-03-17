@@ -1,4 +1,5 @@
-# Westwoods RCON Bot [![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+# Westwoods RCON Bot
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
 
 Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay messages from your server's RCON to a specified discord. This bot also tracks users and the amount of time since the server's wipe, displaying it (if enabled) as the bot's status.
 
@@ -8,6 +9,7 @@ Buenoes, noches. This is a Discord.JS bot, which if setup correctly can relay me
 This bot uses ``ws`` to create a WebSocket, which connects to the server. From there whenever a message is recieved, those messages are sorted and based on the conditions provided gives them a unique embed and color. To track players, when the bot connects it sends a command to the RCON with a unique identifier. The RCON then responds to the command with a message, that has the same unique identifier. This message is sorted based on it's  unique identifier, and every time it is received redefines the amount of players online, maximum, queued, and time since wipe.
 
 ## Configuration
+
 Item | Definition
 --- | ---
 TOKEN=COOLASSTOKENHERE |
@@ -33,5 +35,11 @@ PRIVATE_COLOR=#EB98EF | Private message embed color
 SCHAT_COLOR=#B298EF | Server chat embed color
 CHAT_CHAN=689205495386734661 | Channel ID of where all chat messages go to.
 INCLUDE_WIPED_FROM=LeaveBlankToDisable |Whether or not you want the wipe time to be shown in the status. Delete **LeaveBlankToDisable** for it to be disabled.
+
+## Screenshots
+
+![alt text](https://cdn.discordapp.com/attachments/680167964133031964/689351412815233031/logging_bb.PNG "Embedded text and sorted colors")
+![alt text](https://cdn.discordapp.com/attachments/680167964133031964/689351436928417839/server_info.PNG "Player log channel!")
+![alt text](https://cdn.discordapp.com/attachments/680167964133031964/689351435288051726/date_from.PNG "Example of the bot's status!")
 
 ##
