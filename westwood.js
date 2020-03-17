@@ -117,7 +117,7 @@ client.onmessage = function(event) {
 
         function set(ply) {
             c.user.setActivity(`${ply}`, {
-                type: "WATCHING",
+                type: "WATCHING"
             })
             c.channels.fetch(process.env.PLAYER_CHAN)
                 // .then(channel => channel.send(`${date} : ${wipedate}`));
