@@ -12,11 +12,19 @@ let url = 'ws://' + ip + ':' + port + '/' + pass;
 
 let client = new WebSocket(url)
 
+function send(channel, embed) {
+    if (channel) {
+        c.channels.fetch(channel)
+            .then(channel => channel.send(embed));
+    } else {
+        console.log('There is no channel.');
+    }
+}
+
 client.onopen = function(event) {
     console.log(`Connected to ${url}`)
     setTimeout(() => {
-        c.channels.fetch(process.env.CONNECT_CHAN)
-            .then(channel => channel.send(`${process.env.CONNECT_MSG}`))
+        send(process.env.CONNECT_CHAN, process.env.CONNECT_MSG)
     }, 2000);
 
     setInterval(() => {
@@ -39,24 +47,21 @@ client.onmessage = function(event) {
                     .setDescription(data.Message)
                     .setTimestamp()
                     .setFooter('ID: Server')
-                c.channels.fetch(process.env.ABUSE_CHAN)
-                    .then(channel => channel.send(abuse));
+                send(process.env.ABUSE_CHAN, abuse)
             } else if (['mute', 'kick', 'ban'].some(substring => data.Message.toLowerCase().includes(substring))) {
                 let punishment = new Discord.MessageEmbed()
                     .setColor(`${process.env.PUNISH_COLOR}`)
                     .setDescription(data.Message)
                     .setTimestamp()
                     .setFooter('ID: Server');
-                c.channels.fetch(process.env.PUNISH_CHAN)
-                    .then(channel => channel.send(punishment))
+                send(process.env.PUNISH_CHAN, punish)
             } else if (data.Message.startsWith('[Priv')) {
                 let pm = new Discord.MessageEmbed()
                     .setColor(`${process.env.PRIVATE_COLOR}`)
                     .setDescription(data.Message)
                     .setTimestamp()
                     .setFooter('ID: Private Message does not support ID\'s! :(');
-                c.channels.fetch(process.env.CHAT_CHAN)
-                    .then(channel => channel.send(pm));
+                send(process.env.CHAT_CHAN, pm)
             } else if (data.Message.startsWith('[Better')) {
                 return null;
             } else {
@@ -65,8 +70,7 @@ client.onmessage = function(event) {
                     .setDescription(data.Message)
                     .setTimestamp()
                     .setFooter('ID: Server');
-                c.channels.fetch(process.env.SERVER_CHAN)
-                    .then(channel => channel.send(server));
+                send(process.env.SERVER_CHAN, server)
             }
         } else if (data.Type === 'Chat') {
             let better = JSON.parse(data.Message);
@@ -76,24 +80,21 @@ client.onmessage = function(event) {
                     .setDescription(better.Message)
                     .setTimestamp()
                     .setFooter('ID: ' + better.UserId);
-                c.channels.fetch(process.env.CHAT_CHAN)
-                    .then(channel => channel.send(global));
+                send(process.env.CHAT_CHAN, global)
             } else if (better.Channel === 1) {
                 let team = new Discord.MessageEmbed()
                     .setColor(`${process.env.TEAM_COLOR}`)
                     .setDescription(better.Message)
                     .setTimestamp()
                     .setFooter('ID: ' + better.UserId);
-                c.channels.fetch(process.env.CHAT_CHAN)
-                    .then(channel => channel.send(team));
+                send(process.env.CHAT_CHAN, team)
             } else if (better.Channel === 2) {
                 let schat = new Discord.MessageEmbed()
                     .setColor(`${process.env.SCHAT_COLOR}`)
                     .setDescription(better.Message)
                     .setTimestamp()
                     .setFooter('ID: Server');
-                c.channels.fetch(process.env.CHAT_CHAN)
-                    .then(channel => channel.send(schat));
+                send(process.env.CHAT_CHAN, schat)
             }
         } else if (data.Type === 'Warning') {
             let warning = new Discord.MessageEmbed()
@@ -101,8 +102,7 @@ client.onmessage = function(event) {
                 .setDescription(data.Message)
                 .setTimestamp()
                 .setFooter('ID: Server');
-            c.channels.fetch(process.env.WARNING_CHAN)
-                .then(channel => channel.send(warning));
+            send(process.env.WARNING_CHAN, warning)
         } else {
             return null;
         }
@@ -117,17 +117,19 @@ client.onmessage = function(event) {
 
         function set(ply) {
             c.user.setActivity(`${ply}`, {
-                type: "WATCHING"
+                type: "WATCHING",
             })
-            c.channels.fetch(process.env.PLAYER_CHAN)
-                // .then(channel => channel.send(`${date} : ${wipedate}`));
-                .then(channel => channel.send(ply));
+            send(process.env.PLAYER_CHAN, ply)
         };
 
         if (process.env.INCLUDE_WIPED_FROM) {
             if (queue === 0) {
-                let playerCount = `${players} / ${max} wiped ${dateFrom}`;
-                set(playerCount);
+                try {
+                    let playerCount = `${players} / ${max} wiped ${dateFrom}`;
+                    set(playerCount);
+                } catch (e) {
+                    console.log(e)
+                }
             } else {
                 let playerCount = `${players} / ${max} (${queue}) wiped ${dateFrom}`;
                 set(playerCount);
@@ -146,8 +148,7 @@ client.onmessage = function(event) {
 
 client.onclose = function(event) {
     console.log(`Connect to ${url} has been closed., with close event code: ${event.code}!`)
-    c.channels.fetch(process.env.CONNECT_CHAN) // This doesn't work for some reason
-        .then(channel => channel.send(`${process.env.CLOSE_MSG}`));
+    send(process.env.CONNECT_CHAN, process.env.CLOSE_MSG)
 };
 client.onerror = function(error) {
     console.log('WebSocket Error: ' + error);
