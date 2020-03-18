@@ -51,7 +51,7 @@ SCHAT_COLOR=#B298EF | Server chat embed color
 CHAT_CHAN=689205495386734661 | Channel ID of where all chat messages go to.
 INCLUDE_WIPED_FROM=LeaveBlankToDisable |Whether or not you want the wipe time to be shown in the status. Delete **LeaveBlankToDisable** for it to be disabled.
 
-For support, feel free to message me! **Clint Westwood#8187**
+For support, feel free to message me! **Clint Eastwood#8187**
 
 ## Screenshots
 

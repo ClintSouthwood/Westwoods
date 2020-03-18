@@ -1,3 +1,4 @@
+// CREATE EMBED CONSTRUCTOR!!!!!!! PASS COLOR AND MSG WITH ID IN AN IF ARGUEMENT
 let Discord = require('discord.js');
 let WebSocket = require('ws')
 let moment = require('moment')
@@ -117,7 +118,7 @@ client.onmessage = function(event) {
 
         function set(ply) {
             c.user.setActivity(`${ply}`, {
-                type: "WATCHING",
+                type: "WATCHING"
             })
             send(process.env.PLAYER_CHAN, ply)
         };
@@ -144,7 +145,7 @@ client.onmessage = function(event) {
             }
         }
     }
-}
+};
 
 client.onclose = function(event) {
     console.log(`Connect to ${url} has been closed., with close event code: ${event.code}!`)
@@ -164,6 +165,6 @@ c.on('ready', () => {
     } catch (err) {
         console.log(err)
     }
-})
+});
 
 c.login(process.env.TOKEN);
