@@ -1,4 +1,3 @@
-// CREATE EMBED CONSTRUCTOR!!!!!!! PASS COLOR AND MSG WITH ID IN AN IF ARGUEMENT
 let Discord = require('discord.js');
 let WebSocket = require('ws')
 let moment = require('moment')
@@ -55,7 +54,7 @@ client.onmessage = function(event) {
                     .setDescription(data.Message)
                     .setTimestamp()
                     .setFooter('ID: Server');
-                send(process.env.PUNISH_CHAN, punish)
+                send(process.env.PUNISH_CHAN, punishment)
             } else if (data.Message.startsWith('[Priv')) {
                 let pm = new Discord.MessageEmbed()
                     .setColor(`${process.env.PRIVATE_COLOR}`)
@@ -116,33 +115,31 @@ client.onmessage = function(event) {
         let max = hostinfo.MaxPlayers;
         let queue = hostinfo.Queued;
 
-        function set(ply) {
-            c.user.setActivity(`${ply}`, {
-                type: "WATCHING"
-            })
+        function set(ply, max, q, date) {
+            if (q === 0 && date) {
+                c.user.setActivity(`${ply}/${max} wiped ${date}`, {
+                    type: "WATCHING"
+                })
+            } else if (date) {
+                c.user.setActivity(`${ply}/${max} wiped ${date}`, {
+                    type: "WATCHING"
+                })
+            } else if (!date && q === 0) {
+                c.user.setActivity(`${ply}/${max}`, {
+                    type: "WATCHING"
+                })
+            } else {
+                c.user.setActivity(`${ply}/${max} (${q})`, {
+                    type: "WATCHING"
+                })
+            }
             send(process.env.PLAYER_CHAN, ply)
         };
 
         if (process.env.INCLUDE_WIPED_FROM) {
-            if (queue === 0) {
-                try {
-                    let playerCount = `${players} / ${max} wiped ${dateFrom}`;
-                    set(playerCount);
-                } catch (e) {
-                    console.log(e)
-                }
-            } else {
-                let playerCount = `${players} / ${max} (${queue}) wiped ${dateFrom}`;
-                set(playerCount);
-            }
+            set(players, max, queue, dateFrom)
         } else {
-            if (queue === 0) {
-                let playerCount = `${players} / ${max}`;
-                set(playerCount);
-            } else {
-                let playerCount = `${players} / ${max} (${queue})`;
-                set(playerCount);
-            }
+            set(players, max, queue)
         }
     }
 };
