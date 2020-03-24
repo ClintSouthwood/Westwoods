@@ -42,7 +42,6 @@ function connect() {
                 Username: 'Clint Westwood'
             }))
         }, process.env.RELOAD);
-
         pres();
     };
     // Now this shit is long as fuck
@@ -160,19 +159,16 @@ function connect() {
         setTimeout(function() {
             connect();
         }, 1000);
-
         pres();
     };
     client.onerror = function(error) {
         console.log('WebSocket Error: ' + error);
     };
-};
+}
 
 c.on('ready', () => {
     console.log(`${c.user.tag} has logged on!`);
-
     pres();
-
     connect();
 });
 
